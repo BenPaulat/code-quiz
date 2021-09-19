@@ -52,3 +52,11 @@ header {
     box-shadow: 0 0px gray;
     top: 0;
 }
+
+.response {
+    font-size: 20pt;
+    color: gray;
+    padding: 10px 20px;
+    margin: 20px 100px;
+    border-top: 3px solid rgb(95, 95, 95);
+}
