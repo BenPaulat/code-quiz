@@ -21,9 +21,23 @@ header {
     border-bottom: 5px solid rgb(180, 78, 248);
 }
 
+.view-high-score, .time-remaining, .timer {
+    font-size: 25px;
+}
+
+.view-high-score {
+    text-decoration: none;
+    padding-left: 10px;
+    color: black;
+}
+
+.time-remaining {
+    padding-right: 10px;
+}
+
 /* Page styling */
 .question {
-    font-size: 22pt;
+    font-size: 32px;
     font-style: bold;
     margin: 100px 100px;
 }
@@ -46,6 +60,7 @@ header {
 .btn:hover {
     box-shadow: 1px 2px gray;
     top: -2px;
+    background:rgb(225, 186, 252)
 }
 
 .btn:active {
