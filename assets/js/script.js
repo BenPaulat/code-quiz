@@ -61,7 +61,6 @@ const answerSubmit = function() {
         
     }
 
-    // optionCreate = function() {
     questionEl.textContent = questions[qNum].question;
 
     var optA = document.createElement("button")
