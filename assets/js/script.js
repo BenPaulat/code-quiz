@@ -10,6 +10,21 @@ const timerEl = document.getElementById("time-remaining");
 var score = 0
 var timer = 100
 var qNum = 0
+var timerID;
+timerEl.innerHTML = timer;
+
+
+// Timer function
+const countdown = function() {
+    if (timer <= 0) {
+        clearInterval(timerID);
+        timerEl.innerHTML ="0"
+        endQuiz();
+    } else {
+        timerEl.innerHTML = timer;
+        timer--;
+    }
+}
 
 // questions as objects
 const q0 = {
@@ -66,7 +81,13 @@ const validateSelection = function(selection) {
     answerSubmit()
 }
 
-// Funtion to run quiz
+// End quiz
+const endQuiz = function() {
+    questionEl.textContent = "You have completed the quiz! Thank you for your participation! Refresh the page to take again."
+    buttConEl.remove(buttConEl);        
+}
+
+// Answer Submission function
 const answerSubmit = function() {
 
     // check question number
@@ -77,8 +98,7 @@ const answerSubmit = function() {
     } else if (qNum = questions.length) {
         while (buttConEl.firstChild) {
             buttConEl.removeChild(buttConEl.firstChild);
-            }
-        return questionEl.textContent = "You have completed the quiz! Thank you for your participation! Refresh the page to take again."
+            } endQuiz()
     }
 
     // update question and options
@@ -114,6 +134,8 @@ const answerSubmit = function() {
         
         if (userSelect.matches("#start-button")) {
             answerSubmit();
+            timerID = setInterval(countdown, 1000);
+            // countdown();
         } else {
             answerSubmit();
             validateSelection(selection);
