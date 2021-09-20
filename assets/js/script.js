@@ -4,6 +4,7 @@ const buttConEl = document.getElementById("button-container");
 const responseEl = document.getElementById("response");
 const optionsEl = document.getElementById("answer-buttons");
 const startButtonEl = document.getElementById("start-button");
+const timerEl = document.getElementById("time-remaining");
 
 // set variables
 var score = 0
@@ -17,7 +18,7 @@ const q0 = {
     b: "B. Executing",
     c: "C. Debugging",
     d: "D. Scanning",
-    answer: "c"
+    answer: "C. Debugging"
 }
 
 const q1 = {
@@ -26,7 +27,7 @@ const q1 = {
     b: "B. Functions",
     c: "C. Variables",
     d: "D. Strings",
-    answer: "a"
+    answer: "A. Arrays"
 }
 
 const q2 = {
@@ -35,7 +36,7 @@ const q2 = {
     b: "B. curly brackets",
     c: "C. parenthesis",
     d: "D. square brackets",
-    answer: "c"
+    answer: "C. parenthesis"
 }
 
 const q3 = {
@@ -44,23 +45,43 @@ const q3 = {
     b: "B. jQuery",
     c: "C. RequireJS",
     d: "D. ESLint",
-    answer: "d"
+    answer: "D. ESLint"
 }
 
 let questions = [q0, q1, q2, q3]
 
+// validate user selection
+const validateSelection = function(selection) {
+    if (selection === questions[qNum].answer) {
+        score+= 10;
+        responseEl.textContent = "Correct!";
+    } else {
+        timer-= 10;
+        timerEl.textContent = timer;
+        responseEl.textContent = "Wrong!";
+    }
+
+    qNum++;
+
+    answerSubmit()
+}
+
 // Funtion to run quiz
 const answerSubmit = function() {
-    // debugger;
 
+    // check question number
     if (qNum < questions.length) {
     while (buttConEl.firstChild) {
         buttConEl.removeChild(buttConEl.firstChild);
         }
     } else if (qNum = questions.length) {
-        
+        while (buttConEl.firstChild) {
+            buttConEl.removeChild(buttConEl.firstChild);
+            }
+        return questionEl.textContent = "You have completed the quiz! Thank you for your participation! Refresh the page to take again."
     }
 
+    // update question and options
     questionEl.textContent = questions[qNum].question;
 
     var optA = document.createElement("button")
@@ -80,13 +101,23 @@ const answerSubmit = function() {
         optD.id ="answer-buttons";
         optD.textContent = questions[qNum].d
 
-        buttConEl.appendChild(optA);
-        buttConEl.appendChild(optB);
-        buttConEl.appendChild(optC);
-        buttConEl.appendChild(optD);
-    
-        qNum++;
-    }
-    
+    buttConEl.appendChild(optA);
+    buttConEl.appendChild(optB);
+    buttConEl.appendChild(optC);
+    buttConEl.appendChild(optD);
+}
 
-buttConEl.addEventListener("click", answerSubmit);
+    // button selection
+    const buttonSelect = function() {
+        var userSelect = event.target;
+        var selection = userSelect.innerText;
+        
+        if (userSelect.matches("#start-button")) {
+            answerSubmit();
+        } else {
+            answerSubmit();
+            validateSelection(selection);
+        }
+    }
+
+buttConEl.addEventListener("click", buttonSelect);
